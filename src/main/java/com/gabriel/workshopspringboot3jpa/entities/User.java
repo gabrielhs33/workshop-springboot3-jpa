@@ -1,5 +1,6 @@
 package com.gabriel.workshopspringboot3jpa.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabriel.workshopspringboot3jpa.resources.UserResource;
 import jakarta.persistence.*;
 
@@ -18,6 +19,8 @@ public class User implements Serializable{
     private String email;
     private String phone;
     private String password;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
