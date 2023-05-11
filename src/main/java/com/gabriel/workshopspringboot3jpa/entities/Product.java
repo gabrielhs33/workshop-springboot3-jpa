@@ -19,7 +19,11 @@ public class Product implements Serializable {
     private double price;
     private String imgURL;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name ="category_id")
+    )
     private final Set<Category> categories = new HashSet<>();
 
     public Product(){}
@@ -38,6 +42,10 @@ public class Product implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     public String getDescription() {
