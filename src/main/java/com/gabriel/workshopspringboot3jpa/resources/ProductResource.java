@@ -1,0 +1,39 @@
+package com.gabriel.workshopspringboot3jpa.resources;
+
+import com.gabriel.workshopspringboot3jpa.entities.Product;
+import com.gabriel.workshopspringboot3jpa.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/Products")
+public class ProductResource {
+
+    @Autowired
+    private ProductService service;
+
+    //end point to access Products
+    @GetMapping
+    public ResponseEntity<List<Product>> findAll(){
+
+        List<Product> list = service.findAll();
+
+        return ResponseEntity.ok().body(list);
+    }
+
+    //end point to search for a Product by id
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Product> findById(@PathVariable Long id){
+
+        Product obj = service.findByID(id);
+
+        return ResponseEntity.ok().body(obj);
+    }
+}
