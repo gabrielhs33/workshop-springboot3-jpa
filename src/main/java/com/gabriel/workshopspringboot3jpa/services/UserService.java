@@ -2,8 +2,11 @@ package com.gabriel.workshopspringboot3jpa.services;
 
 import com.gabriel.workshopspringboot3jpa.entities.User;
 import com.gabriel.workshopspringboot3jpa.repositories.UserRepository;
+import com.gabriel.workshopspringboot3jpa.services.exceptions.DataBaseException;
 import com.gabriel.workshopspringboot3jpa.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +37,16 @@ public class UserService {
 
     public void delete(Long id){
 
-        repository.deleteById(id);
+        try {
+
+            repository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+
+            throw new ResourceNotFoundException(id);
+        }catch(DataIntegrityViolationException e){
+
+            throw new DataBaseException(e.getMessage());
+        }
     }
 
     private void updateData(User entity, User obj){
