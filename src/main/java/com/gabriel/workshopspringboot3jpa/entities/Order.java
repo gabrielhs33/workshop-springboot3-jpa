@@ -77,6 +77,7 @@ public class Order implements Serializable {
             this.orderStatus = orderStatus.getCode();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
