@@ -4,6 +4,7 @@ import com.gabriel.workshopspringboot3jpa.entities.User;
 import com.gabriel.workshopspringboot3jpa.repositories.UserRepository;
 import com.gabriel.workshopspringboot3jpa.services.exceptions.DataBaseException;
 import com.gabriel.workshopspringboot3jpa.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -51,10 +52,16 @@ public class UserService {
 
     private void updateData(User entity, User obj){
 
-        entity.setName(obj.getName());
-        entity.setEmail(obj.getEmail());
-        entity.setPhone(obj.getPhone());
+        try{
 
+            entity.setName(obj.getName());
+            entity.setEmail(obj.getEmail());
+            entity.setPhone(obj.getPhone());
+
+        }catch (EntityNotFoundException e){
+
+            throw new ResourceNotFoundException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj){
