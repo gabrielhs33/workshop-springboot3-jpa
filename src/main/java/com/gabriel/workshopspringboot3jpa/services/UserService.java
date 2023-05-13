@@ -2,6 +2,7 @@ package com.gabriel.workshopspringboot3jpa.services;
 
 import com.gabriel.workshopspringboot3jpa.entities.User;
 import com.gabriel.workshopspringboot3jpa.repositories.UserRepository;
+import com.gabriel.workshopspringboot3jpa.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class UserService {
 
         Optional<User> obj = repository.findById(id);
 
-        return obj.get();
+        return obj.orElseThrow(()-> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj){
