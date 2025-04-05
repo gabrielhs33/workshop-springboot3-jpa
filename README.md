@@ -6,7 +6,6 @@
   <img src="https://img.shields.io/badge/JPA-Hibernate-59666C?logo=hibernate&logoColor=white" alt="JPA Hibernate">
 </p>
 
-<p align="center">Projeto desenvolvido durante curso de Java, implementando CRUD completo com Spring Boot 3, JPA/Hibernate e banco de dados relacional.</p>
 
 <h2>🚀 Tecnologias Principais</h2>
 
